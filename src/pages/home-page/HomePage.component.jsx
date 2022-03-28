@@ -3,7 +3,7 @@ import './HomePage.styles.scss';
 
 import DirectoryMenu from '../../components/directory-menu/DirectoryMenu.component';
 
-const HomePage = () => {
+const HomePage = (props) => {
     return (
         <div className='homepage'>
             <DirectoryMenu />
