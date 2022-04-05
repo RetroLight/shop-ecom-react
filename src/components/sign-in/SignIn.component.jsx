@@ -1,6 +1,8 @@
 import React from 'react';
 import './SignIn.styles.scss';
 
+import {auth} from "../../firebase/firebase.utils";
+
 import FormInput from '../form-input/FormInput.component';
 import CustomButton from '../custom-button/CustomButton.component';
 
@@ -16,9 +18,24 @@ class SignIn extends React.Component {
         }
     }
 
-    handleSubmit = event => {
+    handleSubmit = async event => {
         event.preventDefault();
-        this.setState({email: '', password: ''})
+        const {email, password} = this.state;
+
+        try {
+            await auth.signInWithEmailAndPassword(email, password)
+            this.setState({email: '', password: ''})
+        } catch (error) {
+            if (error.message === 'Firebase: There is no user record corresponding to this identifier. The user may have been deleted. (auth/user-not-found).') {
+                alert('Incorrect email or password')
+                this.setState({
+                    email: '',
+                    password: ''
+                })
+            } else {
+                console.log(error.message)
+            }
+        }
     }
 
     changeHandler = event => {
@@ -29,7 +46,7 @@ class SignIn extends React.Component {
     render(){
         return(
             <div className='sign-in'>
-                <h1>I already have an account</h1>
+                <h2>I already have an account</h2>
                 <span>Sign in with your email and password</span>
                 <form onSubmit={this.handleSubmit}>
                     <FormInput label='Email' onChange={this.changeHandler} name='email' type='email' value={this.state.email} required/>
