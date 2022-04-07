@@ -2,6 +2,7 @@ import React from 'react';
 import './DirectoryMenu.styles.scss';
 
 import MenuItem from '../menu-item/MenuItem.component';
+import logger from "redux-logger";
 
 class DirectoryMenu extends React.Component {
     constructor() {

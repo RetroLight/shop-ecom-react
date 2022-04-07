@@ -9,6 +9,9 @@ import HomePage from './pages/home-page/HomePage.component';
 import ShopPage from './pages/shop-page/ShopPage.component';
 import SignInPage from './pages/sign-In-page/SignInPage.component'
 
+import {createStructuredSelector} from "reselect";
+import {selectCurrentUser} from "./redux/user/user.selectors";
+
 import {Route, Switch, Redirect} from 'react-router-dom';
 
 import {connect} from "react-redux";
@@ -54,8 +57,9 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = ({user}) => ({
-    currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser
+    //Здесь используется мемоизация при помощи библиотеки reselect
 })
 
 const mapDispatchToProps = dispatch => ({

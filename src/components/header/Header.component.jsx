@@ -6,6 +6,10 @@ import {auth} from '../../firebase/firebase.utils';
 import './Header.styles.scss';
 import CartDropdown from "../cart-dropdown/CartDropdown.component";
 
+import {createStructuredSelector} from "reselect";
+import {selectCurrentUser} from "../../redux/user/user.selectors";
+import {selectCartHidden} from "../../redux/cart/cart.selectors";
+
 import CartIcon from '../cart-icon/CartIcon.component';
 
 const Header = ({currentUser, hidden}) => {
@@ -30,9 +34,10 @@ const Header = ({currentUser, hidden}) => {
     )
 }
 
-const mapStateToProps = ({user: {currentUser}, cart: {hidden}}) => ({
-    currentUser,
-    hidden
+const mapStateToProps = createStructuredSelector ({
+    currentUser: selectCurrentUser,
+    hidden: selectCartHidden
+    //Здесь используется мемоизация при помощи библиотеки reselect
 })
 
 export default connect(mapStateToProps)(Header);
