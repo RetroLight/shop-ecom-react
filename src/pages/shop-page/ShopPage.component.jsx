@@ -1,28 +1,13 @@
 import React from "react";
-import {SHOP_DATA} from './shopData';
-import CollectionPreview from '../../components/collection-preview/CollectionPreview';
+import './ShopPage.styles.scss';
+import CollectionsOverview from "../../components/collection-overview/CollectionsOverview.component";
 
-class ShopPage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            collections: SHOP_DATA
-        }
-    }
-
-    render() {
-        const {collections} = this.state;
-        return(
-            <div className='shop-page'>
-                {
-                    collections.map(({id, ...collectionsProps}) => {
-                        return <CollectionPreview key={id} {...collectionsProps}/>
-                    })
-                }
-            </div>
-        )
-    }
-
+const ShopPage = () => {
+    return (
+        <div className='shop-page'>
+            <CollectionsOverview/>
+        </div>
+    )
 }
 
 export default ShopPage;

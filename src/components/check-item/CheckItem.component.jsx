@@ -3,9 +3,7 @@ import './CheckItem.styles.scss';
 
 import {connect} from "react-redux";
 
-import {addItem, deleteCartItem} from "../../redux/cart/cart.actions";
-import {decreaseCartItem} from "../../redux/cart/cart.actions";
-
+import {addItem, deleteCartItem, decreaseCartItem} from "../../redux/cart/cart.actions";
 
 const CheckItem = ({cartItem, deleteCartItem, decreaseCartItem, addCartItem}) => {
     const {name, imageUrl, price, quantity} = cartItem
