@@ -1,5 +1,5 @@
 import React from 'react';
-import './SignIn.styles.scss';
+import {SignInContainer, BtnGroup} from './SignIn.styles';
 
 import {auth} from "../../firebase/firebase.utils";
 
@@ -45,18 +45,18 @@ class SignIn extends React.Component {
 
     render(){
         return(
-            <div className='sign-in'>
+            <SignInContainer>
                 <h2>I already have an account</h2>
                 <span>Sign in with your email and password</span>
                 <form onSubmit={this.handleSubmit}>
                     <FormInput label='Email' onChange={this.changeHandler} name='email' type='email' value={this.state.email} required/>
                     <FormInput label='Password' onChange={this.changeHandler} name='password' type='password' value={this.state.password} required/>
-                    <div className='btn-group'>
+                    <BtnGroup>
                         <CustomButton type='submit'>Sign in</CustomButton>
                         <CustomButton onClick={signInWithGoogle} googleBtn>Sign in with Google</CustomButton>
-                    </div>
+                    </BtnGroup>
                 </form>
-            </div>
+            </SignInContainer>
         )
     }
 }

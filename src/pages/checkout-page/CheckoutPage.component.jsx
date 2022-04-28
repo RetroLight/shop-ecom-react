@@ -1,5 +1,5 @@
 import React from "react";
-import './CheckoutPage.styles.scss';
+import {CheckoutPageContainer, CheckoutHeaderContainer, HeaderBlockContainer, EmptyCheck, TotalPrice, TestDataCard} from './CheckoutPage.styles';
 
 import {connect} from "react-redux";
 
@@ -12,35 +12,35 @@ import StripeCheckoutButton from "../../components/StripeCheckoutButton/StripeCh
 
 const CheckoutPage = ({cartItems, totalCartPrice}) => {
     return (
-        <div className='checkout-page'>
-            <div className="checkout-header">
-                <div className="header-block">
+        <CheckoutPageContainer>
+            <CheckoutHeaderContainer>
+                <HeaderBlockContainer>
                     <span>product</span>
-                </div>
-                <div className="header-block">
+                </HeaderBlockContainer>
+                <HeaderBlockContainer>
                     <span>description</span>
-                </div>
-                <div className="header-block">
+                </HeaderBlockContainer>
+                <HeaderBlockContainer>
                     <span>quantity</span>
-                </div>
-                <div className="header-block">
+                </HeaderBlockContainer>
+                <HeaderBlockContainer>
                     <span>price</span>
-                </div>
-                <div className="header-block">
+                </HeaderBlockContainer>
+                <HeaderBlockContainer>
                     <span>remove</span>
-                </div>
-            </div>
-            {cartItems.length ? cartItems.map(item => <CheckItem cartItem={item}/>) : <div className='empty-check'>Your cart is empty =(</div>}
-            <div className='total'>
+                </HeaderBlockContainer>
+            </CheckoutHeaderContainer>
+            {cartItems.length ? cartItems.map(item => <CheckItem cartItem={item}/>) : <EmptyCheck>Your cart is empty =(</EmptyCheck>}
+            <TotalPrice>
                 <span>total ${totalCartPrice}</span>
-            </div>
-            <div className='test-card-data'>
+            </TotalPrice>
+            <TestDataCard>
                 <span>Test card data</span>
                 <span>Card number: 4242 4242 4242 4242</span>
                 <span>Exp date: 01/23 CVC: 123</span>
-            </div>
+            </TestDataCard>
             <StripeCheckoutButton price={totalCartPrice}/>
-        </div>
+        </CheckoutPageContainer>
     )
 }
 
