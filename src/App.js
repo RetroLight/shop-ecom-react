@@ -1,8 +1,7 @@
 import React from "react";
 import './App.css';
 
-import {auth} from './firebase/firebase.utils';
-import {createUserProfileData} from './firebase/firebase.utils';
+import {auth, createUserProfileData} from './firebase/firebase.utils';
 
 import Header from './components/header/Header.component';
 
@@ -25,6 +24,7 @@ class App extends React.Component {
 
     componentDidMount() {
         const {setCurrentUser} = this.props
+
         this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
             if (userAuth) {
                 const userRef = await createUserProfileData(userAuth);
@@ -34,9 +34,8 @@ class App extends React.Component {
                         ...snapshot.data()
                     })
                 })
-            } else {
-                setCurrentUser(userAuth)
             }
+            setCurrentUser(userAuth);
         })
     }
 

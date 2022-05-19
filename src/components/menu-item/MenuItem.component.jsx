@@ -4,7 +4,6 @@ import {MenuItemContainer, CategoryBackgroundImage, ContentContainer} from './Me
 import {withRouter} from 'react-router-dom';
 
 const MenuItem = ({title, imageUrl, size, history, match, linkUrl}) => {
-    console.log(match)
     return (
         <MenuItemContainer size={size} onClick={() => history.push(`${match.url}${linkUrl}`)}>
             <CategoryBackgroundImage className='menuItem__backgroundImage' imageUrl={imageUrl}/>
