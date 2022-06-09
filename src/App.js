@@ -1,8 +1,6 @@
 import React from "react";
 import './App.css';
 
-import {auth, createUserProfileData} from './firebase/firebase.utils';
-
 import Header from './components/header/Header.component';
 
 import HomePage from './pages/home-page/HomePage.component';
@@ -13,30 +11,19 @@ import CheckoutPage from "./pages/checkout-page/CheckoutPage.component";
 import {createStructuredSelector} from "reselect";
 import {selectCurrentUser} from "./redux/user/user.selectors";
 
+import {checkUserSession} from "./redux/user/user.actions";
+
 import {Route, Switch, Redirect} from 'react-router-dom';
 
 import {connect} from "react-redux";
-import {setCurrentUser} from "./redux/user/user.actions";
 
 class App extends React.Component {
 
     unsubscribeFromAuth = null;
 
     componentDidMount() {
-        const {setCurrentUser} = this.props
-
-        this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-            if (userAuth) {
-                const userRef = await createUserProfileData(userAuth);
-                userRef.onSnapshot(snapshot => {
-                    setCurrentUser({
-                        id: snapshot.id,
-                        ...snapshot.data()
-                    })
-                })
-            }
-            setCurrentUser(userAuth);
-        })
+        const {checkUserSession} = this.props;
+        checkUserSession()
     }
 
     componentWillUnmount() {
@@ -62,10 +49,11 @@ class App extends React.Component {
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser
     //Здесь используется мемоизация при помощи библиотеки reselect
-})
+});
+
 
 const mapDispatchToProps = dispatch => ({
-    setCurrentUser: user => dispatch(setCurrentUser(user))
+    checkUserSession: () => dispatch(checkUserSession())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

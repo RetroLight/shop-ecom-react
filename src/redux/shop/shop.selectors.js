@@ -18,3 +18,13 @@ export const selectedCollection = collectionId => {
         collections => collections[collectionId]
     )
 }
+
+export const selectedCollectionsIsFetching = createSelector(
+    [selectShop],
+    shop => shop.isFetching
+)
+
+export const collectionIsLoaded = createSelector(
+    [selectShop],
+    shop => !!shop.collections
+)

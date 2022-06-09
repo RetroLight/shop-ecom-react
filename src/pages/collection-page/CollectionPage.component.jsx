@@ -7,6 +7,7 @@ import {selectedCollection} from "../../redux/shop/shop.selectors";
 
 import CollectionItem from "../../components/collection-item/CollectionItem.component";
 
+// Этот компонент возвращается в компонент высокого порядка withSpinner и оттуда берет проп collection
 const CollectionPage = ({collection}) => {
     const {title, items} = collection
     return (

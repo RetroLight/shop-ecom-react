@@ -5,12 +5,13 @@ import {connect} from "react-redux";
 
 import {createStructuredSelector} from "reselect";
 import {selectCartItemsCount} from "../../redux/cart/cart.selectors";
+import {selectCurrentUser} from "../../redux/user/user.selectors";
 
 import {toggleCartHidden} from "../../redux/cart/cart.actions";
 
-const CartIcon = ({toggleCartHidden, itemQuantity}) => {
+const CartIcon = ({toggleCartHidden, itemQuantity, currentUser}) => {
     return (
-        <CartIconContainer onClick={toggleCartHidden}>
+        <CartIconContainer isActive={currentUser ? true : false} onClick={currentUser ? toggleCartHidden : null}>
             <ShoppingIcon />
             <ItemCount>{itemQuantity}</ItemCount>
         </CartIconContainer>
@@ -19,7 +20,8 @@ const CartIcon = ({toggleCartHidden, itemQuantity}) => {
 
 
 const mapStateToProps = createStructuredSelector({
-    itemQuantity: selectCartItemsCount
+    itemQuantity: selectCartItemsCount,
+    currentUser: selectCurrentUser
     //Здесь используется мемоизация при помощи библиотеки reselect
 })
 
